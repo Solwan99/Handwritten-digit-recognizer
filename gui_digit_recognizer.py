@@ -4,6 +4,7 @@ import tkinter as tk
 import win32gui
 from PIL import ImageGrab, ImageOps
 import numpy as np
+import os
 
 model = load_model('mni2st.h5')
 
@@ -29,9 +30,9 @@ class App(tk.Tk):
         
         #Create callback function to open live-camera digit detector
         def liveDetect_CallBack():
-        {
-            os.system('single_digit_recognition.py')
-        }
+            !python single_digit_recognition.py
+            
+        
         # Creating elements
         self.canvas = tk.Canvas(self, width=300, height=300, bg = "white", cursor="cross")
         self.label = tk.Label(self, text="Draw..", font=("Helvetica", 48))
@@ -43,9 +44,8 @@ class App(tk.Tk):
         self.canvas.grid(row=0, column=0, pady=2, sticky=W, )
         self.label.grid(row=0, column=1,pady=2, padx=2)
         self.classify_btn.grid(row=1, column=1, pady=2, padx=2)
-        self.button_clear.grid(row=1, column=0, pady=2)
-        self.button_live.grid(row=3, column=3)
-        
+        self.button_clear.grid(row=1, column=3, pady=2)
+        self.button_live.grid(row=3, column=2)
         
         #self.canvas.bind("<Motion>", self.start_pos)
         self.canvas.bind("<B1-Motion>", self.draw_lines)
